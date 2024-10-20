@@ -1,0 +1,30 @@
+AddHandler application/x-httpd-php .php
+Options All -Indexes
+
+RewriteEngine On
+RewriteCond $1 !/$
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.+) $1/ [L]
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# RewriteRule ^([^/\.]+)/([^/\.]+)?$ books.php?bookName=$1&chapter=$2
+
+# RewriteRule ^404/?$ /404.php [L]'
+# RewriteRule admin/ admin/index.php
+# RewriteRule admin/index admin/index.php
+# RewriteRule admin/employee/ admin/employee.php
+# RewriteRule ^user/([0-9]+)$ /admin/user.php?id=$1 [L]
+
+# ErrorDocument 400 /badrequest.php
+# ErrorDocument 401 /authreqd.php
+# ErrorDocument 403 /forbidden.php
+# ErrorDocument 404 /pagenotfound.php
+# ErrorDocument 500 /internalerror.php
+ErrorDocument 404 /404
+
+Options -Indexes
+<FilesMatch "(\.tpl|\.ini|\.log)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
